@@ -1,0 +1,2 @@
+class RequirementMajor < ApplicationRecord
+end

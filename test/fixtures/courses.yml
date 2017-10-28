@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  department: MyString
+  units: 1.5
+  description: MyString
+  prereqs: 
+  coreqs: 
+  mini: 1
+
+two:
+  name: MyString
+  department: MyString
+  units: 1.5
+  description: MyString
+  prereqs: 
+  coreqs: 
+  mini: 1

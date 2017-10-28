@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_id: 1
+  name: MyString
+  location: MyString
+  building: MyString
+  room: MyString
+  start_time: 2017-10-28 15:49:23
+  end_time: 2017-10-28 15:49:23
+  days: 
+
+two:
+  course_id: 1
+  name: MyString
+  location: MyString
+  building: MyString
+  room: MyString
+  start_time: 2017-10-28 15:49:23
+  end_time: 2017-10-28 15:49:23
+  days: 
