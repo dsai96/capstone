@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_id: 1
+  name: MyString
+  isCoreq: false
+  isPrereq: false
+
+two:
+  course_id: 1
+  name: MyString
+  isCoreq: false
+  isPrereq: false

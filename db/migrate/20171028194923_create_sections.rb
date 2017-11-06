@@ -8,7 +8,7 @@ class CreateSections < ActiveRecord::Migration[5.1]
       t.string :room
       t.datetime :start_time
       t.datetime :end_time
-      t.array :days
+      t.string :days
 
       t.timestamps
     end

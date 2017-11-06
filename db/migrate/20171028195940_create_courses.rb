@@ -5,8 +5,6 @@ class CreateCourses < ActiveRecord::Migration[5.1]
       t.string :department
       t.float :units
       t.string :description
-      t.hash :prereqs
-      t.hash :coreqs
       t.integer :mini
 
       t.timestamps
