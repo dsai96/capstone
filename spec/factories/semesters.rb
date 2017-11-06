@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :semester do
-    season     { Faker::Season.season }
-    year        { Faker::Yeas.year }
+    season "F"
+    year 2017
   end
 end

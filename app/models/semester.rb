@@ -8,5 +8,4 @@ class Semester < ApplicationRecord
   def title
     season + year.to_s
   end
-  
 end

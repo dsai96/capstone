@@ -64,6 +64,6 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-config.use_transactional_fixtures = false
+# config.use_transactional_fixtures = false
 
 end
