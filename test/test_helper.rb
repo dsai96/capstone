@@ -5,5 +5,13 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  require 'shoulda/matchers'
+
+  Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+  with.test_framework :rspec
+  with.library :rails
+  end
+  end
+
 end

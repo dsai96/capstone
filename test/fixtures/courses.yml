@@ -5,8 +5,6 @@ one:
   department: MyString
   units: 1.5
   description: MyString
-  prereqs: 
-  coreqs: 
   mini: 1
 
 two:
@@ -14,6 +12,4 @@ two:
   department: MyString
   units: 1.5
   description: MyString
-  prereqs: 
-  coreqs: 
   mini: 1
