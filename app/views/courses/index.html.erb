@@ -9,8 +9,6 @@
       <th>Department</th>
       <th>Units</th>
       <th>Description</th>
-      <th>Prereqs</th>
-      <th>Coreqs</th>
       <th>Mini</th>
       <th colspan="3"></th>
     </tr>
@@ -23,8 +21,6 @@
         <td><%= course.department %></td>
         <td><%= course.units %></td>
         <td><%= course.description %></td>
-        <td><%= course.prereqs %></td>
-        <td><%= course.coreqs %></td>
         <td><%= course.mini %></td>
         <td><%= link_to 'Show', course %></td>
         <td><%= link_to 'Edit', edit_course_path(course) %></td>
