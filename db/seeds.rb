@@ -18,7 +18,11 @@ def getAllCourses
 	return all_courses
 end
 
-def createSemesterCourses
+def createSemesters
+	Semester.create(season: 'Spring' year: 2018)
+end
+
+def createCourses
 	all_courses = getAllCourses()
 
 	# create 2988 Course objects
@@ -34,6 +38,15 @@ def createSemesterCourses
 	    course.save!
 
 	end
+end
+
+def createCourseSemesters
+	@sem = Semester.first
+
+	Course.all.each do |course|
+		CourseSemester.create(semester: @sem, course: course)
+	end
+
 end
 
 def createMajors
@@ -60,6 +73,14 @@ def createRequirements
 
 	requirements.each do |name, grade, units|
 		Requirement.create( name: name, grade_required: grade, units: units )
+	end
+end
+
+def createRequirementMajors
+	@major = Major.first
+
+	Requirement.all.each do |req|
+		RequirementMajor.create(requirement: req, major: @major)
 	end
 end
 
@@ -115,9 +136,12 @@ def createCourseRequirements
 
 end
 
-createSemesterCourses()
+createSemesters()
+createCourses()
+createCourseSemesters()
 createMajors()
 createRequirements()
+createRequirementMajors()
 createCourseRequirements()
 
 
