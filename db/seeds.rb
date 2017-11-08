@@ -21,11 +21,11 @@ end
 def createSemesterCourses
 	all_courses = getAllCourses()
 
-	# Create 2988 Course objects
-	all_courses["courses"].each do |course, data|
+	# create 2988 Course objects
+	all_courses["courses"].each do |course_code, data|
 		
 		course = Course.new
-	    course.code = course
+	    course.code = course_code
 	    course.name = data["name"]
 	    course.department = data["department"]
 	    course.units = data["units"]
@@ -34,7 +34,6 @@ def createSemesterCourses
 	    course.save!
 
 	end
-
 end
 
 def createMajors
@@ -57,10 +56,15 @@ def createRequirements
 		["Social and Global Systems", "C", 27],
 		["Quantitative Analysis", "C", 27],
 		["IDeATe", "C", 27],
-
 	]
+
+	requirements.each do |name, grade, units|
+		Requirement.create( name: name, grade_required: grade, units: units )
+	end
 end
 
 createSemesterCourses()
+createMajors()
+createRequirements()
 
 
