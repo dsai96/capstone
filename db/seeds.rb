@@ -4,4 +4,26 @@
 # Examples:
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+  # Major.create(name: 'Information Systems')
+
+# contents = File.open("snippet.txt", "r"){ |file| file.read }
+
+require 'rubygems'
+require 'json/pure'
+
+contents = File.open("db/out.csv", "r"){ 
+	|file| file.read 
+}
+
+all_courses = JSON.parse(contents)
+
+is_courses = []
+all_courses["courses"].each do |course, data|
+	if course.index("67-") == 0 
+		is_courses << course
+	end
+end
+
+puts is_courses
+
+
