@@ -9,6 +9,34 @@
 require 'rubygems'
 require 'json/pure'
 
+def getAllCourses
+	contents = File.open("db/s18.csv", "r"){ 
+		|file| file.read 
+	}
+
+	all_courses = JSON.parse(contents)
+	return all_courses
+end
+
+def createSemesterCourses
+	all_courses = getAllCourses()
+
+	# Create 2988 Course objects
+	all_courses["courses"].each do |course, data|
+		
+		course = Course.new
+	    course.code = course
+	    course.name = data["name"]
+	    course.department = data["department"]
+	    course.units = data["units"]
+	    course.description = data["desc"]
+	    course.mini = 0
+	    course.save!
+
+	end
+
+end
+
 def createMajors
 	Major.create(name: 'Information Systems')
 end
@@ -33,19 +61,6 @@ def createRequirements
 	]
 end
 
-contents = File.open("db/out.csv", "r"){ 
-	|file| file.read 
-}
-
-all_courses = JSON.parse(contents)
-
-is_courses = []
-all_courses["courses"].each do |course, data|
-	if course.index("67-") == 0 
-		is_courses << course
-	end
-end
-
-puts is_courses
+createSemesterCourses()
 
 
