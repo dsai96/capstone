@@ -34,25 +34,7 @@ def createSections course, sections
 		6 => 'S'
 	}
 
-	# t.integer "course_id"
- #    t.string "name"
- #    t.string "location"
- #    t.string "building"
- #    t.string "room"
- #    t.datetime "start_time"
- #    t.datetime "end_time"
- #    t.string "days"
-
 	sections.each do |sec|
-
-		# puts course.name
-		# puts sec["name"]
-		# puts sec["times"][0]["building"]
-		# puts sec["times"]["building"]
-		# puts sec["times"]["begin"] ? sec["times"]["begin"].to_time : nil
-		# puts sec["times"]["end"] ? sec["times"]["end"].to_time : nil
-		# puts sec["times"]["days"].inject("") { |sum, day| sum + days[day] }
-
 
 		section = Section.new
 		section.course = course
@@ -64,6 +46,20 @@ def createSections course, sections
 		section.end_time = sec["times"][0]["end"] ? sec["times"][0]["end"].to_time : nil
 		section.days = sec["times"][0]["days"] ? sec["times"][0]["days"].inject(" ") { |sum, day| sum + days[day] } : nil
 		section.save!
+
+		instructors = sec["instructors"]
+		instructors.each do |i|
+			names = i.split(",")
+			existing_instructor = Instructor.where(fname: names[1], lname: names[0])
+			if existing_instructor.empty?
+				instructor = Instructor.create(fname: names[1], lname: names[0])
+			else
+				instructor = existing_instructor.first
+			end 
+
+			SectionInstructor.create(section: section, instructor: instructor)
+
+		end
 
 	end
 
