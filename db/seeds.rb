@@ -19,7 +19,54 @@ def getAllCourses
 end
 
 def createSemesters
-	Semester.create(season: 'Spring' year: 2018)
+	Semester.create(season: 'Spring', year: 2018)
+end
+
+def createSections course, sections
+
+	days = {
+		0 => 'U',
+		1 => 'M',
+		2 => 'T',
+		3 => 'W',
+		4 => 'R',
+		5 => 'F',
+		6 => 'S'
+	}
+
+	# t.integer "course_id"
+ #    t.string "name"
+ #    t.string "location"
+ #    t.string "building"
+ #    t.string "room"
+ #    t.datetime "start_time"
+ #    t.datetime "end_time"
+ #    t.string "days"
+
+	sections.each do |sec|
+
+		# puts course.name
+		# puts sec["name"]
+		# puts sec["times"][0]["building"]
+		# puts sec["times"]["building"]
+		# puts sec["times"]["begin"] ? sec["times"]["begin"].to_time : nil
+		# puts sec["times"]["end"] ? sec["times"]["end"].to_time : nil
+		# puts sec["times"]["days"].inject("") { |sum, day| sum + days[day] }
+
+
+		section = Section.new
+		section.course = course
+		section.name = sec["name"]
+		section.location = sec["times"][0]["location"]
+		section.building = sec["times"][0]["building"]
+		section.room = sec["times"][0]["room"]
+		section.start_time = sec["times"][0]["begin"] ? sec["times"][0]["begin"].to_time : nil
+		section.end_time = sec["times"][0]["end"] ? sec["times"][0]["end"].to_time : nil
+		section.days = sec["times"][0]["days"] ? sec["times"][0]["days"].inject(" ") { |sum, day| sum + days[day] } : nil
+		section.save!
+
+	end
+
 end
 
 def createCourses
@@ -37,6 +84,7 @@ def createCourses
 	    course.mini = 0
 	    course.save!
 
+	    createSections(course, data["sections"])
 	end
 end
 
@@ -124,7 +172,7 @@ def createCourseRequirements
 	}
 
 	course_requirements.each do |name, courses|
-		puts name, courses
+		# puts name, courses
 		@req = Requirement.where(name: name).first
 		courses.each do |code|
 			@course = Course.where(code: code)

@@ -6,6 +6,8 @@ class Section < ApplicationRecord
     has_many :student_sections
     belongs_to :course
 
-    validates_presence_of :name, :location, :building, :room, :start_time, :end_time, :days
+    # validates_presence_of :name, :location, :building, :room, :start_time, :end_time, :days
+    validates_presence_of :name, :location
+
 
 end
