@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108010354) do
+
+ActiveRecord::Schema.define(version: 20171108023137) do
 
   create_table "course_dependents", force: :cascade do |t|
     t.integer "course_id"
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 20171108010354) do
     t.integer "mini"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code"
   end
 
   create_table "dependents", force: :cascade do |t|
