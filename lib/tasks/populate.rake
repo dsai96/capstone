@@ -25,6 +25,7 @@ namespace :db do
     req_ids = Requirement.all.map(&:id)
     20.times do |i|
       c =  Course.new
+      c.code = [*10..99].sample.to_s + "-" + [*100..999].sample.to_s # "xx-xxx" 
       c.name = Faker::Team.name
       c.department = ["Computer Science", "Information Systems", "Business Administration", "Human-Computer Interaction", "Chemical Engineering"].sample
       c.units = [3, 6, 9, 10, 12].sample
