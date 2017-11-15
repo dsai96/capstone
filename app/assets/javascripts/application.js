@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require_tree .
 //= require jquery
 //= require jquery_ujs
@@ -25,6 +24,13 @@ $( document ).ready(function() {
 	;
 	
 	$('[id^="req-"]').progress();
+
+	// initialize accordian dropdown every time a new set of courses 
+	// are rendered for a filter
+	$('#courses_list').bind("DOMSubtreeModified", function(){
+		$('.ui.accordion').accordion();
+	});
+
 });
 
 
