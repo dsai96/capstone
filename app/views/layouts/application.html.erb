@@ -6,9 +6,14 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= semantic_flash %>
   </head>
 
   <body>
-    <%= yield %>
+	<%= render "partials/left_nav" %>
+	<div class="content">
+		<%= yield %>
+	</div>
+	<%= render "partials/right_nav" %>
   </body>
 </html>

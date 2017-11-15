@@ -13,3 +13,18 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+//= require jquery
+//= require semantic-ui
+
+
+$( document ).ready(function() {
+
+	$('.ui.accordion')
+	  .accordion()
+	;
+	
+	$('[id^="req-"]').progress();
+});
+
+
+
