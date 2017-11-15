@@ -1,18 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<div class="courses"
+<div class="courses">
 
-  <h5>Choose Category</h5>
+  <h3 class="ui dividing header page-header">
+    Courses
+  </h3>
+  <div class="ui raised segment">
 
+  <h5>Filter by Department</h5>
   <%= render partial: "filter_sidebar", locals: {depts: @depts} %>
+  </div>
 
-  <h1>Courses</h1>
   <div id="courses_list">
     <%= render partial: "course_list", locals: {courses: @courses} %>
   </div>
-
+  
 </div>
 
-  </div>
-
-  <%= will_paginate @courses, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next", param_name: "courses" %>
+<%= will_paginate @courses, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next", param_name: "courses" %>
