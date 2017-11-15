@@ -4,7 +4,7 @@ class RequirementsController < ApplicationController
   # GET /requirements
   # GET /requirements.json
   def index
-    @requirements = Requirement.all
+    @requirements = Requirement.alphabetical
   end
 
   # GET /requirements/1

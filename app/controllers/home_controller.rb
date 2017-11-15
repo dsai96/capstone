@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-  	@requirements = Requirement.all
+  	@requirements = Requirement.alphabetical
   end
 end

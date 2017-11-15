@@ -1,26 +1,26 @@
 <div class="ui left fixed vertical menu left-nav">
   <div class="logo">
-    <div>not sio</div>
+    <%= link_to "not sio", home_path %>
   </div>
   <div class="item">
     <div class="header first nav-item-title">Major</div>
     <div class="menu nav-sub-items">
-      <a id="progress" class="item"><%= link_to "Progress", home_path%></a>
-      <a id="progress" class="item"><%= link_to "Requirements", requirements_path%></a>
+      <%= link_to "Progress", home_path, class: "nav-item item", id: "nav-progress" %>
+      <%= link_to "Requirements", requirements_path, class: "nav-item item", id: "nav-requirements"%>
     </div>
   </div>
   <div class="item">
     <div class="header nav-item-title">Plan</div>
     <div class="menu nav-sub-items">
-      <a id="progress" class="item"><%= link_to "Schedule"%></a>
-      <a id="progress" class="item"><%= link_to "Course Catalog", courses_path%></a>
-      <a id="progress" class="item"><%= link_to "Saved Courses"%></a>
+      <%= link_to "Schedule", home_path, class: "nav-item item", id: "nav-schedule"%>
+      <%= link_to "Course Catalog", courses_path, class: "nav-item item", id: "nav-all_courses"%>
+      <%= link_to "Saved Courses", home_path, class: "nav-item item", id: "nav-saved_courses"%>
     </div>
   </div>
   <div class="item">
     <div class="header nav-item-title">Me</div>
     <div class="menu nav-sub-items">
-      <a id="progress" class="item"><%= link_to "Audit"%></a>
+      <%= link_to "Audit",home_path, class: "nav-item item", id: "nav-audit"%>
     </div>
   </div>
 

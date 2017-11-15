@@ -6,4 +6,7 @@ class Requirement < ApplicationRecord
   has_many :course_requirements
 
   validates_presence_of :name, :grade_required
+
+  scope :alphabetical,	-> { order("name") }
+
 end
