@@ -16,3 +16,12 @@
 //= require jquery
 //= require semantic-ui
 
+$( document ).ready(function() {
+
+	$('.ui.accordion')
+	  .accordion()
+	;
+	
+	console.log('here')
+	$('[id^="req-"]').progress();
+});
