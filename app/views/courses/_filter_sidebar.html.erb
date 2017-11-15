@@ -1,0 +1,8 @@
+<!--<select>-->
+  <% depts.each do |dept| %>
+    <%# check_box_tag dept, true, false,
+        data: { remote: true, url: fetch_courses_path(:dept_name => dept), method: :get }
+    %>
+    <%= link_to dept, fetch_courses_path(:dept_name => dept), remote: true  %>
+  <% end %>
+<!--</select>-->

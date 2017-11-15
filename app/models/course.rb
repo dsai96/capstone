@@ -10,6 +10,8 @@ class Course < ApplicationRecord
 	has_many :course_semesters
 	has_many :semesters, through: :course_semesters
 	validates_presence_of :code, :name, :mini
+	
+	scope :for_department, -> (dept) { where("department = ?", dept) }
 
 	def set_defaults
     	# Only set if time_zone IS NOT set
