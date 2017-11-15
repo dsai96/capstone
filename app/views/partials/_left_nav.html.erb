@@ -1,0 +1,28 @@
+<div class="ui left fixed vertical menu left-nav">
+  <div class="logo">
+    <div>SI(NO)</div>
+  </div>
+  <div class="item">
+    <div class="header first nav-item-title">Major</div>
+    <div class="menu nav-sub-items">
+      <a id="progress" class="item"><%= link_to "Progress", home_path%></a>
+      <a id="progress" class="item"><%= link_to "Requirements", requirements_path%></a>
+    </div>
+  </div>
+  <div class="item">
+    <div class="header nav-item-title">Plan</div>
+    <div class="menu nav-sub-items">
+      <a id="progress" class="item"><%= link_to "Schedule"%></a>
+      <a id="progress" class="item"><%= link_to "Course Catalog", courses_path%></a>
+      <a id="progress" class="item"><%= link_to "Saved Courses"%></a>
+    </div>
+  </div>
+  <div class="item">
+    <div class="header nav-item-title">Me</div>
+    <div class="menu nav-sub-items">
+      <a id="progress" class="item"><%= link_to "Audit"%></a>
+    </div>
+  </div>
+
+  <div class="ui segment user-profile"><%= semantic_icon('large user circle outline')%> Divya Mohan</div>
+</div>
