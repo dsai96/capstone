@@ -45,7 +45,7 @@ def createSections course, sections
 		section.start_time = sec["times"][0]["begin"] ? sec["times"][0]["begin"].to_time : nil
 		section.end_time = sec["times"][0]["end"] ? sec["times"][0]["end"].to_time : nil
 		section.days = sec["times"][0]["days"] ? sec["times"][0]["days"].inject(" ") { |sum, day| sum + days[day] } : nil
-		section.save!
+		section.save
 
 		instructors = sec["instructors"]
 		instructors.each do |i|

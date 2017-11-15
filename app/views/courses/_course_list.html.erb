@@ -1,27 +1,19 @@
-<table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Department</th>
-        <th>Units</th>
-        <th>Description</th>
-        <th>Mini</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <% courses.each do |course| %>
-        <tr>
-          <td><%= course.name %></td>
-          <td><%= course.department %></td>
-          <td><%= course.units %></td>
-          <td><%= course.description %></td>
-          <td><%= course.mini %></td>
-          <td><%= link_to 'Show', course %></td>
-          <td><%= link_to 'Edit', edit_course_path(course) %></td>
-          <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-</table>
+<div class="ui accordion">
+
+    <% @courses.each do |course| %>
+
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <%= course.code %> <%= course.name %>
+          <div class="course-actions">
+            <i class="add circle icon"></i>
+            <i class="empty star icon"></i>
+          </div>
+        </div>
+        <div class="content course-details">
+          <p class="course-units">Units: <%= course.units %></p>
+          <p><%= course.description %></p>
+        </div>
+      
+    <% end %>
+</div>

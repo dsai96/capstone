@@ -15,3 +15,17 @@
 //= require_tree .
 //= require jquery
 //= require jquery_ujs
+//= require semantic-ui
+
+
+$( document ).ready(function() {
+
+	$('.ui.accordion')
+	  .accordion()
+	;
+	
+	$('[id^="req-"]').progress();
+});
+
+
+

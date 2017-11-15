@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    @courses = Course.all.paginate(:page => params[:courses]).per_page(20)
     
     # set departments TODO: only do this once during seeding and store departments somewhere?
     @depts = []
@@ -18,7 +18,7 @@ class CoursesController < ApplicationController
   end
   
   def from_department
-    @selected = Course.for_department(params[:dept_name])
+    @courses = Course.for_department(params[:dept_name]).paginate(:page => params[:courses]).per_page(20)
     respond_to do |format|
       format.js
     end

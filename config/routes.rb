@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'home/index'
+
   resources :students
   resources :majors
   resources :requirements
@@ -12,4 +14,8 @@ Rails.application.routes.draw do
   get "/fetch_courses" => "courses#from_department", as: "fetch_courses"
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  get 'home' => 'home#index', as: :home
+
+  root :to => 'home#index'
 end
