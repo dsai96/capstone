@@ -1,27 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-  <h3 class="ui dividing header page-header">
-    Courses
-  </h3>
+<div class="courses"
 
-  <div class="ui accordion">
+  <h5>Choose Category</h5>
 
-    <% @courses.each do |course| %>
+  <%= render partial: "filter_sidebar", locals: {depts: @depts} %>
 
-        <div class="title">
-          <i class="dropdown icon"></i>
-          <%= course.code %> <%= course.name %>
-          <div class="course-actions">
-            <i class="add circle icon"></i>
-            <i class="empty star icon"></i>
-          </div>
-        </div>
-        <div class="content course-details">
-          <p class="course-units">Units: <%= course.units %></p>
-          <p><%= course.description %></p>
-        </div>
-      
-    <% end %>
+  <h1>Courses</h1>
+  <div id="courses_list">
+    <%= render partial: "course_list", locals: {courses: @courses} %>
+  </div>
+
+</div>
 
   </div>
 

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   resources :sections
   resources :section_instructors
   resources :instructors
+  
+  get "/fetch_courses" => "courses#from_department", as: "fetch_courses"
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get 'home' => 'home#index', as: :home
