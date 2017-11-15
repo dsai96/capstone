@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Courses</h1>
+  <h3 class="ui dividing header page-header">
+    Courses
+  </h3>
 
   <div class="ui accordion">
 
@@ -8,12 +10,19 @@
 
         <div class="title">
           <i class="dropdown icon"></i>
-          <%= course.name %>
+          <%= course.code %> <%= course.name %>
+          <div class="course-actions">
+            <i class="add circle icon"></i>
+            <i class="empty star icon"></i>
+          </div>
         </div>
-        <div class="content">
+        <div class="content course-details">
+          <p class="course-units">Units: <%= course.units %></p>
           <p><%= course.description %></p>
         </div>
       
     <% end %>
 
   </div>
+
+  <%= will_paginate @courses, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next", param_name: "courses" %>
