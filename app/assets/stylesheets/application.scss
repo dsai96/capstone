@@ -46,6 +46,14 @@
 	color: white;
 }
 
+.logo a {
+	font-size: 1.5em;
+	font-weight: bolder;
+	text-align: center;
+	color: white;
+	background-color: transparent;
+}
+
 .content {
 	margin: 2% 18% !important;
 }
@@ -79,21 +87,23 @@
 }
 
 .nav-sub-items {
-	
-	margin-bottom: 0.5em !important; 
 
 	a {
-		margin-left: 15px;
-		color: #A8A8A8 !important;
 		font-family: 'Open Sans', sans-serif;
-		font-size: 0.85em !important;
-		line-height: 1 !important;
 
 		&:hover {
 			color: white !important;
-			background-color: transparent;
 		}
 	}
+}
+
+.nav-inactive {
+	color: #A8A8A8 !important;
+}
+
+.nav-active {
+	color: white !important;
+	font-weight: bolder;
 }
 
 .item:before {
@@ -125,3 +135,4 @@
 	background-color: transparent;
 	font-weight: bolder;
 }
+

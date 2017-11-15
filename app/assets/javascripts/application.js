@@ -16,6 +16,11 @@
 //= require jquery_ujs
 //= require semantic-ui
 
+function deactivateNavItems () {
+	$( ".nav-item" ).each( function( i, item ) {
+    	$(item).addClass("nav-inactive")
+	});
+} 
 
 $( document ).ready(function() {
 
@@ -28,8 +33,27 @@ $( document ).ready(function() {
 	// initialize accordian dropdown every time a new set of courses 
 	// are rendered for a filter
 	$('#courses_list').bind("DOMSubtreeModified", function(){
+		console.log('her')
 		$('.ui.accordion').accordion();
 	});
+
+	if ($('#home').is(':visible')) {
+    	deactivateNavItems();
+    	$( "#nav-progress" ).removeClass("nav-inactive");
+		$( "#nav-progress" ).addClass("nav-active");
+    }
+
+    else if ($('#requirements').is(':visible')) {
+    	deactivateNavItems();
+    	$( "#nav-requirements" ).removeClass("nav-inactive");
+		$( "#nav-requirements" ).addClass("nav-active");
+    }
+
+    else if ($('#courses').is(':visible')) {
+    	deactivateNavItems();
+    	$( "#nav-all_courses" ).removeClass("nav-inactive");
+		$( "#nav-all_courses" ).addClass("nav-active");
+    }
 
 });
 

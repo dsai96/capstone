@@ -1,21 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<h3 class="ui dividing header">
-  Requirements
-</h3>
+<div id="requirements">
+  <h3 class="ui dividing header">
+    Requirements
+  </h3>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @requirements.each do |requirement| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= requirement.name %></td>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @requirements.each do |requirement| %>
+        <tr>
+          <td><%= requirement.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
