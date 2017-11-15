@@ -25,7 +25,16 @@
 
 .right-nav {
 	width: 15% !important;
+	background-color: #E8E8E8 !important;
+	border: 0 !important;
+}
 
+.right-nav-item {
+	padding: 18px;
+	text-align: left;
+	font-size: 1.15em;
+	font-weight: bolder;
+	border-bottom: 1px solid white; 
 }
 
 .logo {
@@ -39,8 +48,6 @@
 
 .content {
 	margin: 2% 18% !important;
-	/*overflow-wrap: break-word;*/
-	/*overflow-x: scroll;*/
 }
 
 .user-profile {
@@ -102,9 +109,7 @@
 }
 
 .add-course {
-	position: absolute;
-	right: 0;
-	display: inline-block;
+	float: right;
 }
 
 .course-details {
