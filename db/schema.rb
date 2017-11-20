@@ -118,6 +118,11 @@ ActiveRecord::Schema.define(version: 20171108023137) do
   create_table "student_sections", force: :cascade do |t|
     t.integer "student_id"
     t.integer "section_id"
+    t.boolean "saved"
+    t.boolean "registered"
+    t.boolean "completed"
+    t.string "grade_recieved"
+    t.boolean "added"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
