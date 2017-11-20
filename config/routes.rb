@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :courses
   resources :sections
   resources :section_instructors
+  resources :student_sections
   resources :instructors
   
   get "/fetch_courses" => "courses#from_department", as: "fetch_courses"

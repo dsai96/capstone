@@ -22,6 +22,7 @@ def createSemesters
 	Semester.create(season: 'Spring', year: 2018)
 end
 
+# create 594 sections
 def createSections course, sections
 
 	days = {
