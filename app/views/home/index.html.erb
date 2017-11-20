@@ -4,8 +4,8 @@
 	</h3>
 
 	<% @requirements.each_with_index do |requirement, index| %>
+		<%= link_to requirement.name, requirement, class: "prog-label" %>
 		<div class="ui olive progress" data-value="4" data-total=<%= requirement.units %> id="req-<%=index%>">
-		  <div class="label prog-label"><%= requirement.name %></div>
 		  <div class="bar"></div>
 		</div>
 		<br>

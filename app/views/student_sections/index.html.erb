@@ -3,10 +3,11 @@
 <div id="schedule_plan">
 
   <h3 class="ui dividing header page-header">
-    Semester Schedule Plan
+    <%= @latest_semester.season %> <%= @latest_semester.year %> Schedule Plan
   </h3>
 
   <div id="wrapper">
-    <div id="myScheduler"></div>
+    <%= render "partials/calendar_view" %>
   </div>
+
 </div>

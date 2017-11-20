@@ -67,7 +67,7 @@ $( document ).ready(function() {
 		    new Y.Scheduler(
 		      {
 		        activeView: weekView,
-		        boundingBox: '#myScheduler',
+		        boundingBox: '#calendar_view',
 		        date: new Date(2018, 0, 15),
 		        eventRecorder: eventRecorder,
 		        items: events,
