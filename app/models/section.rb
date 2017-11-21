@@ -8,4 +8,7 @@ class Section < ApplicationRecord
 
     validates_presence_of :name, :location, :building, :room, :start_time, :end_time, :days
 
+	scope :for_course, 	-> (id) { where("course_id = ?", id) }
+
+
 end

@@ -88,7 +88,6 @@ $( document ).ready(function() {
 	// initialize accordian dropdown every time a new set of courses 
 	// are rendered for a filter
 	$('#courses_list').bind("DOMSubtreeModified", function(){
-		console.log('her')
 		$('.ui.accordion').accordion();
 	});
 

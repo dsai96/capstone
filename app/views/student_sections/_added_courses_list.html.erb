@@ -1,0 +1,7 @@
+ <% unless courses.nil? %>
+  	<h2>HELLO</h2>
+	<% courses.each do |course| %>
+		<h4><%= course.name %></h4>
+		<br>
+	<% end %>
+<% end %>

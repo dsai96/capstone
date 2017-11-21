@@ -14,8 +14,37 @@ class StudentSectionsController < ApplicationController
   end
 
   # POST /add_section
-  def add_section
-    # @studeent = 
+  def add_section_to_student
+
+    @student = Student.all.first
+    @sections = Section.for_course(params[:course_id])
+
+    puts "student"
+    puts params[:course_id]
+    puts @student.fname 
+    puts @sections.size
+
+    @sections.each do |sec|
+      stuSec = StudentSection.new
+      stuSec.student = @student
+      stuSec.section = sec
+      stuSec.added = true
+      stuSec.save
+    end
+
+    all_sections = StudentSection.where(student: @student)
+    @divya = []
+    all_sections.each do |s|
+      unless @divya.include?(s.section.course)
+        @divya.push(s.section.course)
+      end
+    end
+
+    puts @divya.map { |e| e.name }
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   # GET /student_sections/1

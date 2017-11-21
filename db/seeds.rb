@@ -18,6 +18,10 @@ def getAllCourses
 	return all_courses
 end
 
+def createStudent
+	Student.create(fname: 'Divya', lname: 'Mohan', email:'drmohan@andrew.cmu.edu')
+end
+
 def createSemesters
 	Semester.create(season: 'Spring', year: 2018)
 end
@@ -181,6 +185,7 @@ def createCourseRequirements
 
 end
 
+createStudent()
 createSemesters()
 createCourses()
 createCourseSemesters()
