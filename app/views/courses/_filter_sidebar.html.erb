@@ -1,10 +1,22 @@
-<!--<select>-->
-<div class="dept-filters">
-  <% depts.each do |dept| %>
-    <%# check_box_tag dept, true, false,
+<div class="ui raised segment">
+  <h5>Filter by Department</h5>
+  <div class="dept-filters">
+    <% depts.each do |dept| %>
+      <%# check_box_tag dept, true, false,
         data: { remote: true, url: fetch_courses_path(:dept_name => dept), method: :get }
-    %>
-    <%= link_to dept, fetch_courses_path(:dept_name => dept), class: "dept-item", remote: true  %> |
-  <% end %>
+      %>
+      <%= link_to dept, fetch_courses_path(:dept_name => dept, :min_unit => min_unit), class: "dept-item", remote: true  %>
+    <% end %>
+  </div>
 </div>
-<!--</select>-->
+
+<div class="ui raised segment">
+  <h5>Filter by Units</h5>
+  <div class="unit-filters">
+    <!--Min: <%# select_tag "min_unit", "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>".html_safe, class: "unit-item", data: { remote: true, url: url_for( action: :fetch_courses, min_unit: this.value ) } %>-->
+    Min: 
+    <% [*1..12].each do |num| %>
+      <%= link_to num, fetch_courses_path(:min_unit => num, :dept_name => dept_name), class: "unit-item", remote: true %>
+    <% end %>
+  </div>
+</div>
