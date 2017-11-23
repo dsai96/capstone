@@ -18,6 +18,6 @@
 	<div class="content">
 		<%= yield %>
 	</div>
-	<%= render "partials/right_nav" %>
+	<%= render partial: "partials/right_nav", locals: { test: @test } %>
   </body>
 </html>
