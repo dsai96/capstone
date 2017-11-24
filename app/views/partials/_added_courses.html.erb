@@ -1,3 +1,16 @@
-<% test.each do |t| %>
-	<h4><%= t %></h4>
+<% if not courses.nil? %>
+	<div class="courses_added">
+		<% courses.each do |course| %>
+			<div class="ui accordion">
+			  <div class="title">
+			  	<div class="courses_added_wrapper">
+				    <i class="dropdown icon"></i>
+					<%= course.code %> <%#= course.name %>
+					<%= semantic_icon('trash icon add-course')%>
+				</div>
+			  </div>
+			  <div class="content"></div>
+			</div>
+		<% end %>
+	</div>
 <% end %>

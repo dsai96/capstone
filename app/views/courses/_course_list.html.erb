@@ -6,7 +6,7 @@
           <i class="dropdown icon"></i>
           <%= course.code %> <%= course.name %>
           <div class="course-actions">
-            <%= link_to "TESTING", add_course_path, remote: true, method: :post  %>
+            <%= link_to "TESTING", add_course_path(:course => course), remote: true, method: :post  %>
             <i class='add circle icon'></i>
             <i class="empty star icon"></i>
           </div>

@@ -86,6 +86,7 @@ def createCourses
 	    course.save!
 
 	    createSections(course, data["sections"])
+	    createSections(course, data["lectures"])
 	end
 end
 
