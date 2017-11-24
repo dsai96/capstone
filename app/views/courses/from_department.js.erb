@@ -1,2 +1,2 @@
 $("#courses_list").html("<%= escape_javascript(render partial: "course_list" ) %>");
-$("#filters_sidebar").html("<%= escape_javascript(render partial: "filter_sidebar", locals: {depts: @depts, dept_name: @dept_name, min_unit: @min_unit} ) %>");
+$("#filters_sidebar").html("<%= escape_javascript(render partial: "filter_sidebar", locals: {depts: @depts, dept_name: @dept_name, min_unit: @min_unit, max_unit: @max_unit} ) %>");

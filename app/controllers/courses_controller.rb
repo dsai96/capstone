@@ -33,14 +33,27 @@ class CoursesController < ApplicationController
     
     @dept_name = params[:dept_name]
     @min_unit = params[:min_unit]
+    @max_unit = params[:max_unit]
     unless @dept_name.nil?
       @courses = @courses.for_department(@dept_name)
     end
     unless @min_unit.nil?
       @courses = @courses.min_units(@min_unit)
     end
+    unless @max_unit.nil?
+      @courses = @courses.max_units(@max_unit)
+    end
     #@courses = Course.for_department(params[:dept_name]).paginate(:page => params[:courses]).per_page(20)
     @courses = @courses.paginate(:page => params[:courses]).per_page(20)
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def find_course
+    code = params[:code]
+    @courses = Course.for_code(code)
+    byebug
     respond_to do |format|
       format.js
     end

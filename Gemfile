@@ -45,7 +45,6 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.4'
-  gem 'rails-erd', require: false
 end
 
 group :test do
