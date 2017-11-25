@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     @courses = Course.all
+    @requirements = Requirement.all
     
     # set departments TODO: only do this once during seeding and store departments somewhere?
     @depts = []
@@ -21,6 +22,7 @@ class CoursesController < ApplicationController
   
   def from_department
     @courses = Course.all
+    @requirements = Requirement.all
     
     @depts = []
     @courses.each do |c|
@@ -34,7 +36,9 @@ class CoursesController < ApplicationController
     @dept_name = params[:dept_name]
     @min_unit = params[:min_unit]
     @max_unit = params[:max_unit]
-    unless @dept_name.nil?
+    @req_name = params[:req_name]
+    
+    unless @dept_name.nil? || (@dept_name == "all")
       @courses = @courses.for_department(@dept_name)
     end
     unless @min_unit.nil?
@@ -43,6 +47,11 @@ class CoursesController < ApplicationController
     unless @max_unit.nil?
       @courses = @courses.max_units(@max_unit)
     end
+    unless @req_name.nil? || (@req_name == "all")
+      req_id = Requirement.find_by_name(@req_name).id
+      @courses = @courses.for_requirement(req_id)
+    end
+    
     #@courses = Course.for_department(params[:dept_name]).paginate(:page => params[:courses]).per_page(20)
     @courses = @courses.paginate(:page => params[:courses]).per_page(20)
     respond_to do |format|
@@ -53,7 +62,6 @@ class CoursesController < ApplicationController
   def find_course
     code = params[:code]
     @courses = Course.for_code(code)
-    byebug
     respond_to do |format|
       format.js
     end
