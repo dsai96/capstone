@@ -80,7 +80,7 @@ $( document ).ready(function() {
 	}
 
 	$('.ui.accordion')
-	  .accordion()
+	  $('.ui.accordion').accordion();
 	;
 	
 	$('[id^="req-"]').progress();
@@ -90,6 +90,11 @@ $( document ).ready(function() {
 	$('#courses_list').bind("DOMSubtreeModified", function(){
 		$('.ui.accordion').accordion();
 	});
+
+	$('#added_courses').bind("DOMSubtreeModified", function(){
+		$('.ui.accordion').accordion();
+	});
+
 
 	if ($('#home').is(':visible')) {
     	deactivateNavItems();
