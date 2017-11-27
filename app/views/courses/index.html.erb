@@ -5,16 +5,16 @@
   <h3 class="ui dividing header page-header">
     Courses
   </h3>
-  <div class="ui raised segment">
-
-  <h5>Filter by Department</h5>
-  <%= render partial: "filter_sidebar", locals: {depts: @depts} %>
+  <div id="filters_sidebar">
+    <%= render partial: "filter_sidebar", locals: {depts: @depts, dept_name: @dept_name, min_unit: @min_unit, max_unit: @max_unit, req_name: @req_name} %>
   </div>
 
   <div id="courses_list">
     <%= render partial: "course_list", locals: {courses: @courses} %>
   </div>
   
+  <div id="pagination_links">
+    <%= render partial: "pagination_link", locals: {courses: @courses, dept_name: @dept_name, min_unit: @min_unit, max_unit: @max_unit, req_name: @req_name} %>
+  </div>
+  
 </div>
-
-<%= will_paginate @courses, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next", param_name: "courses" %>

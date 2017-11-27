@@ -1,10 +1,64 @@
-<!--<select>-->
-<div class="dept-filters">
-  <% depts.each do |dept| %>
-    <%# check_box_tag dept, true, false,
-        data: { remote: true, url: fetch_courses_path(:dept_name => dept), method: :get }
-    %>
-    <%= link_to dept, fetch_courses_path(:dept_name => dept), class: "dept-item", remote: true  %> |
-  <% end %>
+<div class="ui raised segment">
+  <h5>Enter Course Code</h5>
+  <div class="dept-filters">
+    <%= form_with(model: @course, :url => {:action => "find_course"}) do |f| %>
+      <%= f.text_field :code %>
+      <%= f.submit %>
+    <% end %>
+  </div>
 </div>
-<!--</select>-->
+
+<div class="ui raised segment">
+  <h5>Filter by Department</h5>
+  <div class="dept-filters">
+    <% if dept_name == "all" || dept_name.nil? %><b><% end %>
+    <%= link_to "ALL", fetch_courses_path(:dept_name => "all", :min_unit => min_unit, :max_unit => max_unit, :req_name => req_name), class: "dept-item", remote: true  %>
+    <% if dept_name == "all" || dept_name.nil? %></b><% end %>
+    
+    <% depts.each do |dept| %>
+      <%# check_box_tag dept, true, false,
+        data: { remote: true, url: fetch_courses_path(:dept_name => dept), method: :get }
+      %>
+      <% if dept == dept_name %><b><% end %>
+      <%= link_to dept, fetch_courses_path(:dept_name => dept, :min_unit => min_unit, :max_unit => max_unit, :req_name => req_name), class: "dept-item", remote: true  %>
+      <% if dept == dept_name %></b><% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="ui raised segment">
+  <h5>Filter by Units</h5>
+  <div class="unit-filters">
+
+    <!--Min: <%# select_tag "min_unit", "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>".html_safe, class: "unit-item", data: { remote: true, url: url_for( action: :fetch_courses, min_unit: this.value ) } %>-->
+    Min: 
+    <% [*1..12].each do |num| %>
+      <% if min_unit.to_s == num.to_s %><b><% end %>
+      <%= link_to num, fetch_courses_path(:min_unit => num, :dept_name => dept_name, :max_unit => max_unit, :req_name => req_name), class: "unit-item", remote: true %>
+      <% if min_unit.to_s == num.to_s %></b><% end %>
+    <% end %>
+    <br>
+    Max: 
+    <% [*1..12].each do |num| %>
+      <% if max_unit.to_s == num.to_s %><b><% end %>
+      <%= link_to num, fetch_courses_path(:max_unit => num, :dept_name => dept_name, :min_unit => min_unit, :req_name => req_name), class: "unit-item", remote: true %>
+      <% if max_unit.to_s == num.to_s %></b><% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="ui raised segment">
+  <h5>Filter by Requirement</h5>
+  <div class="dept-filters">
+    
+    <% if req_name == "all" || req_name.nil? %><b><% end %>
+    <%= link_to "ALL", fetch_courses_path(:req_name => "all", :min_unit => min_unit, :max_unit => max_unit, :dept_name => dept_name), class: "dept-item", remote: true  %>
+    <% if req_name == "all" || req_name.nil? %></b><% end %>
+    
+    <% @requirements.each do |req| %>
+      <% if req.name == req_name %><b><% end %>
+      <%= link_to req.name, fetch_courses_path(:req_name => req.name, :min_unit => min_unit, :max_unit => max_unit, :dept_name => dept_name), class: "req-item", remote: true  %>
+      <% if req.name == req_name %></b><% end %>
+    <% end %>
+  </div>
+</div>

@@ -4,7 +4,8 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all.paginate(:page => params[:courses]).per_page(20)
+    @courses = Course.all
+    @requirements = Requirement.all
     
     # set departments TODO: only do this once during seeding and store departments somewhere?
     @depts = []
@@ -15,10 +16,63 @@ class CoursesController < ApplicationController
       end
     end
     @depts.sort_by!{ |d| d.downcase }
+    
+    # order course-set by code + paginate
+    @courses = @courses.by_code
+    if (@courses.length > 20)
+      @courses = @courses.paginate(:page => params[:courses]).per_page(20)
+    end
   end
   
   def from_department
-    @courses = Course.for_department(params[:dept_name]).paginate(:page => params[:courses]).per_page(20)
+    @courses = Course.all
+    @requirements = Requirement.all
+    
+    # Gathering all departments
+    @depts = []
+    @courses.each do |c|
+      dept = c.department
+      unless @depts.include?(dept)
+        @depts.push(dept)
+      end
+    end
+    @depts.sort_by!{ |d| d.downcase }
+    
+    # Obtaining ajax params
+    @dept_name = params[:dept_name]
+    @min_unit = params[:min_unit]
+    @max_unit = params[:max_unit]
+    @req_name = params[:req_name]
+    
+    # Filtering course-set according to ajax params
+    unless @dept_name.nil? || (@dept_name == "all")
+      @courses = @courses.for_department(@dept_name)
+    end
+    unless @min_unit.nil?
+      @courses = @courses.min_units(@min_unit)
+    end
+    unless @max_unit.nil?
+      @courses = @courses.max_units(@max_unit)
+    end
+    unless @req_name.nil? || (@req_name == "all")
+      req_id = Requirement.find_by_name(@req_name).id
+      @courses = @courses.for_requirement(req_id)
+    end
+    
+    # order course-set by code + paginate
+    @courses = @courses.by_code
+    @courses = @courses.paginate(:page => params[:courses]).per_page(20)
+    
+    respond_to do |format|
+      format.js
+      format.json
+      format.html
+    end
+  end
+  
+  def find_course
+    code = params[:code]
+    @courses = Course.for_code(code)
     respond_to do |format|
       format.js
     end
