@@ -13,12 +13,11 @@ Rails.application.routes.draw do
   resources :instructors
   
   get "/fetch_courses" => "courses#from_department", as: "fetch_courses"
+
   post "/add_course" => "application#add_course_to_list", as: "add_course"
   delete "/delete_course" => "application#delete_added_section", as: "delete_course"
 
-
-    
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  post "/find_course" => "courses#find_course", as: "find_course"
 
   get 'home' => 'home#index', as: :home
 
