@@ -5,7 +5,10 @@ class Semester < ApplicationRecord
 
   validates_presence_of :season, :year
 
+  scope :chronological,		-> { order("year", "season") }
+
   def title
     season + year.to_s
   end
+  
 end
