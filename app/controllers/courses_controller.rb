@@ -17,13 +17,18 @@ class CoursesController < ApplicationController
     end
     @depts.sort_by!{ |d| d.downcase }
     
-    @courses = @courses.paginate(:page => params[:courses]).per_page(20)
+    # order course-set by code + paginate
+    @courses = @courses.by_code
+    if (@courses.length > 20)
+      @courses = @courses.paginate(:page => params[:courses]).per_page(20)
+    end
   end
   
   def from_department
     @courses = Course.all
     @requirements = Requirement.all
     
+    # Gathering all departments
     @depts = []
     @courses.each do |c|
       dept = c.department
@@ -33,11 +38,13 @@ class CoursesController < ApplicationController
     end
     @depts.sort_by!{ |d| d.downcase }
     
+    # Obtaining ajax params
     @dept_name = params[:dept_name]
     @min_unit = params[:min_unit]
     @max_unit = params[:max_unit]
     @req_name = params[:req_name]
     
+    # Filtering course-set according to ajax params
     unless @dept_name.nil? || (@dept_name == "all")
       @courses = @courses.for_department(@dept_name)
     end
@@ -52,10 +59,14 @@ class CoursesController < ApplicationController
       @courses = @courses.for_requirement(req_id)
     end
     
-    #@courses = Course.for_department(params[:dept_name]).paginate(:page => params[:courses]).per_page(20)
+    # order course-set by code + paginate
+    @courses = @courses.by_code
     @courses = @courses.paginate(:page => params[:courses]).per_page(20)
+    
     respond_to do |format|
       format.js
+      format.json
+      format.html
     end
   end
   

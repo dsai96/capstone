@@ -18,6 +18,7 @@ class Course < ApplicationRecord
     scope :min_units,       -> (min) { where("units >= ?", min) }
 	scope :max_units,       -> (max) { where("units <= ?", max) }
 	scope :for_requirement, -> (req) { joins(:course_requirements).where("course_requirements.requirement_id == ?", req) }
+	scope :by_code,         -> { order("code") }
 
 	def set_defaults
     	# Only set if time_zone IS NOT set
