@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
 		secs.each do |s|
 			ss = StudentSection.new
-			ss.student = @student   
+			ss.student = @student
 			ss.section = s
 			ss.added = true
 			ss.save!

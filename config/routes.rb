@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'home/index'
 
   resources :students
   resources :majors
@@ -11,7 +10,7 @@ Rails.application.routes.draw do
   resources :section_instructors
   resources :student_sections
   resources :instructors
-  
+
   get "/fetch_courses" => "courses#from_department", as: "fetch_courses"
 
   post "/add_course" => "application#add_course_to_list", as: "add_course"
@@ -20,6 +19,10 @@ Rails.application.routes.draw do
   post "/find_course" => "courses#find_course", as: "find_course"
 
   get 'home' => 'home#index', as: :home
+  get 'signup' => 'students#new', as: :signup
 
-  root :to => 'home#index'
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  get    '/logout',  to: 'sessions#destroy', as: :logout
+  root 'sessions#new'
 end
