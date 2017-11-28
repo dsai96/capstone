@@ -1,6 +1,6 @@
 <div class="ui right fixed vertical menu right-nav">
 	<div class="item">
-		<div class="header courses-title">Courses <%= semantic_icon('large add circle icon add-course')%></div>
+		<div class="header courses-title">Courses <%= link_to "<i class='large add circle icon add-course'></i>".html_safe, courses_path %><%#= semantic_icon('large add circle icon add-course')%></div>
 	</div>
 	<div id="added_courses">
 		<%= render partial: "partials/added_courses", locals: { courses: courses } %>

@@ -5,19 +5,30 @@
     Requirements
   </h3>
 
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-      </tr>
-    </thead>
+  <div class="ui accordion">
 
-    <tbody>
-      <% @requirements.each do |requirement| %>
-        <tr>
-          <td><%= requirement.name %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <% @requirements.each do |requirement| %>
+    <div class="title">
+      <i class="dropdown icon"></i>
+      <%= requirement.name %>
+    </div>
+    <div class="content course-details">
+        <table class="ui striped table">
+          <tbody>
+            <% Course.for_requirement(requirement).each do |course| %>
+            <tr>
+              <td><%= course.code %> <%= course.name %>
+              <div class="course-actions">
+                <%= link_to "<i class='add circle icon'></i>".html_safe, add_course_path(:course => course), remote: true, method: :post  %>
+                <!-- <i class="empty star icon"></i> -->
+              </div></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+    </div>
+  <% end %>
+  </div>
+
 </div>

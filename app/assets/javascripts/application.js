@@ -39,20 +39,13 @@ $( document ).ready(function() {
 		  'aui-scheduler',
 		  function(Y) {
 		    var events = [
-		      {
-		        content: 'Partial Lunar Eclipse',
-		        endDate: new Date(2013, 3, 25, 5),
-		        startDate: new Date(2013, 3, 25, 1)
-		      },
-		      {
-		        color: "#8d8",
-		        content: 'Earth Day Lunch',
-		        disabled: true,
-		        endDate: new Date(2013, 3, 22, 13),
-		        meeting: true,
-		        reminder: true,
-		        startDate: new Date(2013, 3, 22, 12)
-		      }
+		      // {
+		      //   content: '15-112',
+		      //   color: '#8aa382',
+		      //   meeting: true,
+		      //   endDate: new Date(2018, 0, 15, 14),
+		      //   startDate: new Date(2018, 0, 15, 13)
+		      // }
 		    ];
 
 		    var agendaView = new Y.SchedulerAgendaView();
@@ -77,6 +70,13 @@ $( document ).ready(function() {
 		    );
 		  }
 		);
+
+		// var days = document.getElementsByClassName('scheduler-view-day-header-day-number');
+		// console.log(days.length)
+		// for (var i=0; i < 7; i++) {
+		// 	console.log(days)
+		// 	days[i].html("<a href='#'><span>Monday</span></a>")
+		// }
 	}
 
 	$('.ui.accordion')
@@ -92,6 +92,10 @@ $( document ).ready(function() {
 	});
 
 	$('#added_courses').bind("DOMSubtreeModified", function(){
+		$('.ui.accordion').accordion();
+	});
+
+	$('#requirements').bind("DOMSubtreeModified", function(){
 		$('.ui.accordion').accordion();
 	});
 
