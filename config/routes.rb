@@ -15,8 +15,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get 'home' => 'home#index', as: :home
-  get 'home/index'
-  get 'login' => 'main#login', as: :login
+  get 'signup' => 'students#new', as: :signup
 
-  root 'main#login'
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  get    '/logout',  to: 'sessions#destroy', as: :logout
+  root 'sessions#new'
 end

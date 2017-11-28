@@ -1,4 +1,6 @@
 class StudentsController < ApplicationController
+  layout 'nologin'
+
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   # GET /students
@@ -69,6 +71,6 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:fname, :lname, :email)
+      params.require(:student).permit(:fname, :lname, :email, :password, :password_confirmation)
     end
 end
