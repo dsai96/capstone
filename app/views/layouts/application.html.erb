@@ -4,8 +4,12 @@
     <title>Planner</title>
     <%= csrf_meta_tags %>
 
+    <%= javascript_include_tag 'https://cdn.alloyui.com/3.0.1/aui/aui-min.js' %>
+    <%= stylesheet_link_tag    'https://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css' %>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <%= semantic_flash %>
   </head>
 
@@ -14,6 +18,6 @@
 	<div class="content">
 		<%= yield %>
 	</div>
-	<%= render "partials/right_nav" %>
+	<%= render partial: "partials/right_nav", locals: { courses: @added_courses } %>
   </body>
 </html>

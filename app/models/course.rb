@@ -12,6 +12,13 @@ class Course < ApplicationRecord
 	validates_presence_of :code, :name, :mini
 	
 	scope :for_department, 	-> (dept) { where("department = ?", dept) }
+	scope :for_units,       -> (unit) { where("units = ?", unit) }
+	scope :for_code,        -> (code) { where("code = ?", code) }
+	scope :between_units,   -> (min, max) { where("(units >= ?) AND (units <= ?)", min, max) }
+    scope :min_units,       -> (min) { where("units >= ?", min) }
+	scope :max_units,       -> (max) { where("units <= ?", max) }
+	scope :for_requirement, -> (req) { joins(:course_requirements).where("course_requirements.requirement_id == ?", req) }
+	scope :by_code,         -> { order("code") }
 
 	def set_defaults
     	# Only set if time_zone IS NOT set

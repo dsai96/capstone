@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<div id="schedule_plan">
+
+  <h3 class="ui dividing header page-header">
+    <%= @latest_semester.season %> <%= @latest_semester.year %> Schedule Plan
+  </h3>
+
+  <div id="wrapper">
+    <%= render "partials/calendar_view" %>
+  </div>
+
+</div>

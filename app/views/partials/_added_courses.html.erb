@@ -1,0 +1,18 @@
+<% if not courses.nil? %>
+	<div class="courses_added">
+		<% courses.each do |course| %>
+			<div class="ui accordion">
+			  <div class="title">
+			  	<div class="courses_added_wrapper">
+				    <i class="dropdown icon"></i>
+					<%= course.code %> <%#= course.name %>
+					<%= link_to "<i class='trash icon add-course'></i>".html_safe, delete_course_path(:course => course), remote: true, method: :delete  %>
+				</div>
+			  </div>
+			  <div class="content added_course_content">
+			  	<%= course.name%>
+			  </div>
+			</div>
+		<% end %>
+	</div>
+<% end %>

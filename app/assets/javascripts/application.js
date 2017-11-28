@@ -24,8 +24,63 @@ function deactivateNavItems () {
 
 $( document ).ready(function() {
 
+	if ($('#schedule_plan').is(':visible')) {
+
+		$.ajax ({
+			url: 'student_sections.json',
+		    complete: function (data) {
+		    	console.log(data.responseText)
+		    	// get events
+		    }
+		})
+	      
+
+		YUI().use(
+		  'aui-scheduler',
+		  function(Y) {
+		    var events = [
+		      {
+		        content: 'Partial Lunar Eclipse',
+		        endDate: new Date(2013, 3, 25, 5),
+		        startDate: new Date(2013, 3, 25, 1)
+		      },
+		      {
+		        color: "#8d8",
+		        content: 'Earth Day Lunch',
+		        disabled: true,
+		        endDate: new Date(2013, 3, 22, 13),
+		        meeting: true,
+		        reminder: true,
+		        startDate: new Date(2013, 3, 22, 12)
+		      }
+		    ];
+
+		    var agendaView = new Y.SchedulerAgendaView();
+		    var dayView = new Y.SchedulerDayView();
+		    var weekView = new Y.SchedulerWeekView({
+
+		    });
+		    var monthView = new Y.SchedulerMonthView();
+
+		    var eventRecorder = new Y.SchedulerEventRecorder();
+
+		    new Y.Scheduler(
+		      {
+		        activeView: weekView,
+		        boundingBox: '#calendar_view',
+		        date: new Date(2018, 0, 15),
+		        eventRecorder: eventRecorder,
+		        items: events,
+		        render: true,
+		        views: [weekView]
+		      }
+		    );
+		  }
+		);
+	}
+
 	$('.ui.accordion')
-	  .accordion()
+	  $('.ui.accordion').accordion();
 	;
 	
 	$('[id^="req-"]').progress();
@@ -33,9 +88,13 @@ $( document ).ready(function() {
 	// initialize accordian dropdown every time a new set of courses 
 	// are rendered for a filter
 	$('#courses_list').bind("DOMSubtreeModified", function(){
-		console.log('her')
 		$('.ui.accordion').accordion();
 	});
+
+	$('#added_courses').bind("DOMSubtreeModified", function(){
+		$('.ui.accordion').accordion();
+	});
+
 
 	if ($('#home').is(':visible')) {
     	deactivateNavItems();
@@ -53,6 +112,12 @@ $( document ).ready(function() {
     	deactivateNavItems();
     	$( "#nav-all_courses" ).removeClass("nav-inactive");
 		$( "#nav-all_courses" ).addClass("nav-active");
+    }
+
+    else if ($('#schedule_plan').is(':visible')) {
+    	deactivateNavItems();
+    	$( "#nav-schedule" ).removeClass("nav-inactive");
+		$( "#nav-schedule" ).addClass("nav-active");
     }
 
 });

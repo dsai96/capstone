@@ -110,8 +110,19 @@
 	background: #A8A8A8 !important;
 }
 
+.progress {
+	margin-top: 5px !important;
+	margin-bottom: 15px !important;
+}
+
 .prog-label {
 	text-align: left !important;
+	color: black !important;
+	background-color: transparent !important;
+
+	&:hover {
+		font-weight: bolder;
+	}
 }
 
 .courses-title {
@@ -136,3 +147,32 @@
 	font-weight: bolder;
 }
 
+
+.courses_added {
+	padding: 18px;
+	text-align: left;
+	font-size: 1em;
+	font-weight: bold;
+}
+
+.courses_added_wrapper {
+}
+
+.added_course_content {
+	width: 100%;
+	margin-left: 5px !important;
+}
+/* ALLOY OVERRIDES */
+
+.scheduler-view-day-header-day {
+
+	a:hover {
+		background-color: transparent !important; 
+		text-decoration: none !important;
+		cursor: default !important;
+	}
+}
+
+.btn-group-content {
+	visibility: hidden !important;
+}
