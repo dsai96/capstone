@@ -5,14 +5,31 @@
 			  <div class="title">
 			  	<div class="courses_added_wrapper">
 				    <i class="dropdown icon"></i>
-					<%= course.code %> <%#= course.name %>
+					<%= course.code %>
 					<%= link_to "<i class='trash icon add-course'></i>".html_safe, delete_course_path(:course => course), remote: true, method: :delete  %>
+					<%#= link_to "<i class='hide icon add-course'></i>".html_safe, '#' %>
+
 				</div>
 			  </div>
 			  <div class="content added_course_content">
-			  	<%= course.name%>
+			  	<div class="course_title"> <%= course.name %><br></div>
+			  	<% course.sections.by_name.each do |sec| %>
+			  		<% if sec.name.include?('Lec') %>
+				      	<span class="lecture"> <%= sec.name %></span><span class="times"><%= sec.start_time.strftime("%l:%M%P") %> - <%= sec.end_time.strftime("%l:%M%P") %></span>
+					<% end %>		
+				<% end %>
+			  	<% course.sections.by_name.each do |sec| %>
+			  		<% unless sec.name.include?('Lec') %>
+				      	<div class="ui radio checkbox">
+					        <input type="radio" name="example2" checked="checked">
+							<label><%= sec.name %><span class="times"><%= sec.start_time.strftime("%l:%M%P") %> - <%= sec.end_time.strftime("%l:%M%P") %></span></label>
+						</div>
+					<% end %>		
+				<% end %>
+				
 			  </div>
 			</div>
+			<div class="ui divider"></div>
 		<% end %>
 	</div>
 <% end %>

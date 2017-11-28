@@ -4,6 +4,7 @@ class StudentSectionsController < ApplicationController
   # GET /student_sections
   # GET /student_sections.json
   def index
+
     @latest_semester = Semester.all.chronological.last
     @student_sections = StudentSection.all
     @some_data = Course.first(10).map { |m| m.id }

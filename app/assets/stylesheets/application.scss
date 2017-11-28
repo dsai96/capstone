@@ -140,6 +140,13 @@
 
 .course-actions {
 	float: right;
+
+}
+
+.course-actions a{
+	&:hover {
+		background-color: transparent !important;
+	}
 }
 
 .dept-item:hover {
@@ -155,13 +162,26 @@
 	font-weight: bold;
 }
 
-.courses_added_wrapper {
-}
-
 .added_course_content {
 	width: 100%;
 	margin-left: 5px !important;
 }
+
+.course_title {
+	margin-bottom: 10px;
+}
+
+.lecture {
+	display: inline !important;
+	margin: 5px 0px !important;
+}
+
+.times {
+	font-weight: lighter;
+	display: inline !important;
+	margin-left: 15px;
+}
+
 /* ALLOY OVERRIDES */
 
 .scheduler-view-day-header-day {
@@ -173,6 +193,18 @@
 	}
 }
 
-.btn-group-content {
+.btn-group {
+	visibility: hidden !important;
+}
+
+.scheduler-base-view-date {
+	visibility: hidden !important;
+}
+
+.yui3-widget-hd {
+	/*visibility: hidden !important;*/
+}
+
+.scheduler-base-hd {
 	visibility: hidden !important;
 }
