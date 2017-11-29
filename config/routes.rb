@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :instructors
   
   get "/fetch_courses" => "courses#from_department", as: "fetch_courses"
+  get "/courses/from_department" => "courses#from_department", as: "courses/from_department"
 
   post "/add_course" => "application#add_course_to_list", as: "add_course"
   delete "/delete_course" => "application#delete_added_section", as: "delete_course"
