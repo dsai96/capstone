@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  include SessionsHelper
   layout 'nologin'
   def new
   end
