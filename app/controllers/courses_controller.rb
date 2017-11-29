@@ -39,10 +39,22 @@ class CoursesController < ApplicationController
     @depts.sort_by!{ |d| d.downcase }
     
     # Obtaining ajax params
-    @dept_name = params[:dept_name]
-    @min_unit = params[:min_unit]
-    @max_unit = params[:max_unit]
-    @req_name = params[:req_name]
+    if params[:values].nil? # ajax via min/max
+      @dept_name = params[:dept_name]
+      @min_unit = params[:min_unit]
+      @max_unit = params[:max_unit]
+      @req_name = params[:req_name]
+    else
+      if params[:values][0] == "["
+        values = eval(params[:values])
+      else
+        values = params[:values].split(",")
+      end
+      @dept_name = values[0]
+      @min_unit = values[1]
+      @max_unit = values[2]
+      @req_name = values[3]
+    end
     
     # Filtering course-set according to ajax params
     unless @dept_name.nil? || (@dept_name == "all")

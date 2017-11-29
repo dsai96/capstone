@@ -82,6 +82,16 @@ $( document ).ready(function() {
 	$('.ui.accordion')
 	  $('.ui.accordion').accordion();
 	;
+    
+    $('.ui.dropdown').dropdown({
+		onChange: function(values) {
+		    $.ajax({
+	            type: 'GET',
+	            url: '/fetch_courses',      
+	            data: {values},
+	        });
+		}
+	});
 	
 	$('[id^="req-"]').progress();
 
