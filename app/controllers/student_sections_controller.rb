@@ -7,7 +7,7 @@ class StudentSectionsController < ApplicationController
 
     @latest_semester = Semester.all.chronological.last
     @student_sections = StudentSection.all
-    @some_data = Course.first(10).map { |m| m.id }
+    # @some_data = Course.first(10).map { |m| m.id }
     respond_to do |format|
       format.html
       format.json
