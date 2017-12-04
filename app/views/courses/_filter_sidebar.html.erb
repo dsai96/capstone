@@ -1,17 +1,18 @@
-<div class="ui raised segment">
+<!-- <div class="ui raised segment">
   <h5>Enter Course Code</h5>
   <div class="dept-filters">
-    <%= form_with(model: @course, :url => {:action => "find_course"}) do |f| %>
-      <%= f.text_field :code, :placeholder => "xx-xxx" %>
-      <%= f.submit "Search" %>
-    <% end %>
+    <%#= form_with(model: @course, :url => {:action => "find_course"}) do |f| %>
+      <%#= f.text_field :code, :placeholder => "xx-xxx" %>
+      <%#= f.submit "Search" %>
+    <%# end %>
   </div>
-</div>
+</div> -->
 
-<div class="ui raised segment">
+
+<!-- <div class="ui raised segment"> -->
   <div class="ui grid">
     <div class="four wide column">
-      <h5>Filter by Department</h5>
+      <!-- <h5>Filter by Department</h5> -->
       <div class="dept-filters">
         <div class="ui selection dropdown dept-selection">
           <input type="hidden" name="department">
@@ -33,7 +34,7 @@
     </div>
     
     <div class="four wide column">
-      <h5>Filter by Requirement</h5>
+      <!-- <h5>Filter by Requirement</h5> -->
       <div class="dept-filters">
         <div class="ui selection dropdown req-selection">
           <input type="hidden" name="requirements">
@@ -55,7 +56,7 @@
     </div>
     
     <div class="four wide column">
-      <h5>Filter by Units</h5>
+      <!-- <h5>Filter by Units</h5> -->
       <div class="unit-filters">
         Min: 
         <% [*1..12].each do |num| %>
@@ -72,5 +73,16 @@
         <% end %>
       </div>
     </div>
+
+    <div class="four wide column">
+      <div class="ui icon input">
+        <div class="dept-filters">
+          <%= form_with(model: @course, :url => {:action => "find_course"}) do |f| %>
+            <%= f.text_field :code, :placeholder => "xx-xxx" %>
+          <% end %>
+        </div>
+        <i class="search icon"></i>
+      </div>
+    </div>
   </div>
-</div>
+<!-- </div> -->

@@ -5,6 +5,16 @@
   <h3 class="ui dividing header page-header">
     Courses
   </h3>
+<!--   <div class="ui icon input">
+    <div class="dept-filters">
+      <%= form_with(model: @course, :url => {:action => "find_course"}) do |f| %>
+        <%= f.text_field :code, :placeholder => "xx-xxx" %>
+      <% end %>
+    </div>
+    <i class="search icon"></i>
+  </div> -->
+
+
   <div id="filters_sidebar">
     <%= render partial: "filter_sidebar", locals: {depts: @depts, dept_name: @dept_name, min_unit: @min_unit, max_unit: @max_unit, req_name: @req_name} %>
   </div>

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   	protect_from_forgery with: :exception
   	before_action :get_added_courses
- 	 include SessionsHelper
+ 	include SessionsHelper
 
 
 	def get_added_courses
@@ -66,9 +66,13 @@ class ApplicationController < ActionController::Base
 					@added_courses.push(sec.section.course)
 				end
 			end
+
+   			@colors = ['#CD5C5C', '#6e7bb2', '#6fa397']
+    		@added_student_sections = StudentSection.where(student_id: @student.id).map { |ss| [ss.section, ss.section.course.code, @colors[ss.section.course.id%3]] }
 		end
 
 	    respond_to do |format|
+	      	format.json { render :json => @added_student_sections }
 	      	format.js { render :template => "student_sections/add_course_to_list" }
 	    end
 

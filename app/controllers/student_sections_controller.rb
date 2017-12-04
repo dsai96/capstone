@@ -1,4 +1,5 @@
 class StudentSectionsController < ApplicationController
+  include SessionsHelper
   before_action :set_student_section, only: [:show, :edit, :update, :destroy]
 
   # GET /student_sections
@@ -6,8 +7,9 @@ class StudentSectionsController < ApplicationController
   def index
 
     @latest_semester = Semester.all.chronological.last
-    @student_sections = StudentSection.all
-    # @some_data = Course.first(10).map { |m| m.id }
+    @student = current_student
+    @colors = ['#CD5C5C', '#6e7bb2', '#6fa397']
+    @added_student_sections = StudentSection.where(student_id: @student.id).map { |ss| [ss.section, ss.section.course, @colors[ss.section.course.id%3]]}
     respond_to do |format|
       format.html
       format.json

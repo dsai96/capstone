@@ -208,3 +208,7 @@
 .scheduler-base-hd {
 	visibility: hidden !important;
 }
+
+.scheduler-view-week .scheduler-event-title, .scheduler-view-week .scheduler-event-content {
+	font-size: 11px !important;
+}
