@@ -12,8 +12,21 @@ class Student < ApplicationRecord
 
   has_secure_password
 
-
   def name
     fname.capitalize + " " + lname.capitalize
   end
+  
+  def completed_courses
+    completed_courses_array = []
+    ss_completed = self.student_sections.completed
+    unless ss_completed.count == 0
+      ss_completed.each do |ss|
+        completed_courses_array.push(ss.section.course)
+      end
+    end
+    
+    return completed_courses_array
+    
+  end
+  
 end

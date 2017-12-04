@@ -3,12 +3,81 @@
 	  Progress
 	</h3>
 
+	<div class="ui accordion">
+		
+		<% course_assignments = Hash.new(0) %>   <!-- here we're tracking if a course has been assigned to a requirement in the view -->
+		<% requirement_units = Hash.new(0) %>    <!-- here we're tracking how many units have been assigned to a requirement -->
 
-	<% @requirements.each_with_index do |requirement, index| %>
-		<%= link_to requirement.name, requirement, class: "prog-label" %>
-		<div class="ui olive progress" data-value="4" data-total=<%= requirement.units %> id="req-<%=index%>">
-		  <div class="bar"></div>
-		</div>
-		<br>
-	<% end %>
+		<% @requirements.each_with_index do |requirement, index| %>
+			<div class="title">
+				<i class="dropdown icon"></i>
+			    <%= requirement.name %>
+			</div>
+			<div class="content course-details">
+		        <table class="ui striped table">
+		         	<tbody>
+		         		<!-- This next line takes all courses this student has completed and matches them with courses for this requirement -->
+		         		<% requirement_student_courses = @current_student.completed_courses & Course.for_requirement(requirement) %>
+		         		<% units_fulfilled = 0 %>
+		            	<% requirement_student_courses.each do |course| %>
+		            	
+		            		<!-- First, check if the course should be assigned to this requirement -->
+		            		<% course_has_not_been_assigned = course_assignments[course.id] == 0 %>
+		            		<% if requirement_units[requirement.id].nil? %>
+		            			<% requirement_needs_the_units = true %>
+		            		<% else %>
+		            		    <% requirement_needs_the_units = ((requirement.units - requirement_units[requirement.id]) >= course.units) %>
+		            		<% end %>
+		            		
+		   					<!-- Now assign it to this requirement -->
+		            		<% if course_has_not_been_assigned && requirement_needs_the_units %>
+		            			<% course_assignments[course.id] = 1 %> <!-- marking course as assigned -->
+		            			<% requirement_units[requirement.id]  = requirement_units[requirement.id].to_i + course.units %>
+			            		<% units_fulfilled += course.units %>
+			            		<tr>
+			              			<td><%= course.code %> <%= course.name %>
+			              				<div class="course-actions">
+			                				<%# link_to "<i class='add circle icon'></i>".html_safe, add_course_path(:course => course), remote: true, method: :post  %>
+			                				<!-- K Sai your button thing goes here -->
+			                				<button>Re-Assign</button>
+			              				</div>
+			              			</td>
+			            		</tr>
+			            	<% end %>
+		            	<% end %>
+		          	</tbody>
+		        </table>
+	    	</div>
+			<div class="ui olive progress" data-tooltip=<%=units_fulfilled.to_i.to_s%>/<%=requirement.units.to_s%> data-value=<%= units_fulfilled %> data-total=<%= requirement.units %> id="req-<%=index%>">
+			  <div class="bar"></div>
+			</div>
+			<br>
+		<% end %>
+		
+		<!-- Finally, post all courses that were not assigned to a requirement here -->
+		<% courses_that_werent_assigned = ((@current_student.completed_courses.map{|c| c.id }) - course_assignments.keys) %>
+		<% if courses_that_werent_assigned.count == 0 %>
+		    <h4>No Unassigned Courses</h4>
+		<% else %>
+			<h4>Un-assigned Courses</h4>
+			<div class="content course-details">
+				<table class="ui striped table">
+			    	<tbody>
+						<% courses_that_werent_assigned.each do |course_id| %>
+							<% course = Course.find(course_id) %>
+							<tr>
+								<td><%= course.code %> <%= course.name %>
+		              				<div class="course-actions">
+		                				<%# link_to "<i class='add circle icon'></i>".html_safe, add_course_path(:course => course), remote: true, method: :post  %>
+		                				<!-- K Sai your button thing goes here -->
+		                				<button>Re-Assign</button>
+		              				</div>
+		              			</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		<% end %>
+	</div>
 </div>
