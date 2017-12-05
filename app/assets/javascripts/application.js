@@ -44,7 +44,7 @@ function buildSections ( data, omit_id ) {
 		var id = sections[i][0]['id']
 		var start_time = sections[i][0]['start_time'].split("T")[1].split(":")
 		var end_time = sections[i][0]['end_time'].split("T")[1].split(":")
-		var color = sections[i][2]; //colors[Math.floor(Math.random() * colors.length)];
+		var color = sections[i][2]; 
 
 		var days = sections[i][0]['days'].trim().split("")
 
@@ -61,7 +61,6 @@ function buildSections ( data, omit_id ) {
 
 			if (sections[i][1].id != omit_id && sections[i][0]['name'].includes('Lec')) {
     			shown_sections.push(event)
-    			// console.log('hello')
     		}
 
     		if (parsed_sections[id] == null) {
@@ -73,12 +72,11 @@ function buildSections ( data, omit_id ) {
 	}
 
 	var options = $('input[name="section"]')
-	console.log(options)
 	for (var i=0; i<options.length; i++) {
 		if (options[i].checked) {
 			var id = options[i].id
 			var these_sections = parsed_sections[id]
-			for (var s=0; s<these_sections.length; s++){
+			for (var s=0; s<these_sections.length; s++) {
 				if (these_sections[s]['course'].id != omit_id) {
 					shown_sections.push(these_sections[s])
 				}
@@ -92,6 +90,7 @@ function buildSections ( data, omit_id ) {
 
 function renderSections ( sections ) {
 	$('#calendar_view').empty();
+
 	YUI().use(
 	  'aui-scheduler',
 	  function(Y) {
@@ -131,6 +130,8 @@ function renderSections ( sections ) {
 }
 
 $( document ).ready(function() {
+
+
 
 	if ($('#schedule_plan').is(':visible')) {
 
@@ -181,8 +182,6 @@ $( document ).ready(function() {
 	});
 
 	$('.delete_added_course').bind( 'click', function( e ) {
-		console.log('clicked')
-		console.log(e)
 		var id = e.currentTarget.id
 		$.ajax ({
 			url: 'student_sections.json',
@@ -194,14 +193,16 @@ $( document ).ready(function() {
 	});
 
 	$('input[name=section]').change( function() { 
-		$.ajax ({
-			url: 'student_sections.json',
-		    complete: function (data) {
-				var shown_sections = buildSections(data)	
-				renderSections(shown_sections)	    	
-		    }
-		})
-	 });
+		if ($('#schedule_plan').is(':visible')) {
+			$.ajax ({
+				url: 'student_sections.json',
+			    complete: function (data) {
+					var shown_sections = buildSections(data)	
+					renderSections(shown_sections)	    	
+			    }
+			})
+		}
+	});
 
 
 	$('#requirements').bind("DOMSubtreeModified", function(){

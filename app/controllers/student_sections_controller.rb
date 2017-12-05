@@ -8,8 +8,8 @@ class StudentSectionsController < ApplicationController
 
     @latest_semester = Semester.all.chronological.last
     @student = current_student
-    @colors = ['#CD5C5C', '#6e7bb2', '#6fa397']
-    @added_student_sections = StudentSection.where(student_id: @student.id).map { |ss| [ss.section, ss.section.course, @colors[ss.section.course.id%3]]}
+    @colors = ['#CD5C5C', '#6e7bb2', '#6fa397', '#7a2851', '#d49189', '#608888']
+    @added_student_sections = StudentSection.where(student_id: @student.id).map { |ss| [ss.section, ss.section.course, @colors[ss.section.course.id%6]]}
     respond_to do |format|
       format.html
       format.json
