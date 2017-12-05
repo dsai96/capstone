@@ -1,18 +1,32 @@
-<h1>Log in</h1>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
+<div class="ui middle aligned center aligned grid">
+  <div class="column log-in"> 
+<!--     <i class="huge black calendar icon"></i>
+    <h1>notSIO</h1> -->
+    <h2 class="ui center aligned icon header">
+      <i class="huge circular calendar icon"></i>
+      notSIO
+    </h2>
+    <div class="ui large form">
     <%= form_for(:session, url: login_path) do |f| %>
+      <div class="field">
+        <div class="ui left icon input">
+          <i class="user icon"></i>
+          <%= f.email_field :email, class: 'form-control', :placeholder => "email@andrew.cmu.edu" %>
+        </div>
+      </div>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+      <div class="field">
+        <div class="ui left icon input">
+          <i class="lock icon"></i>
+          <%= f.password_field :password, class: 'form-control', :placeholder => "password" %>
+        </div>
+      </div>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+      <button class="ui fluid large sio-blue submit button" type="submit">Log In</button>
+      
     <% end %>
-
+    </div>
+    <br>
     <p>New user? <%= link_to "Sign up now!", signup_path %></p>
   </div>
 </div>
