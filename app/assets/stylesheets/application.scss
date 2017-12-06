@@ -27,6 +27,7 @@
 	width: 15% !important;
 	background-color: #E8E8E8 !important;
 	border: 0 !important;
+	overflow-y: scroll !important;
 }
 
 .right-nav-item {
@@ -76,6 +77,10 @@
 	margin-bottom: 25px !important;
 }
 
+.pagination {
+	padding-top: 20px;
+}
+
 .nav-item-title {
 	color: white;
 	line-height: 0.75 !important;
@@ -123,6 +128,10 @@
 	&:hover {
 		font-weight: bolder;
 	}
+}
+
+#courses_list {
+	/*margin-top: 6%;*/
 }
 
 .courses-title {
@@ -182,6 +191,11 @@
 	margin-left: 15px;
 }
 
+.unpad {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+}
+
 /* ALLOY OVERRIDES */
 
 .scheduler-view-day-header-day {
@@ -207,4 +221,8 @@
 
 .scheduler-base-hd {
 	visibility: hidden !important;
+}
+
+.scheduler-view-week .scheduler-event-title, .scheduler-view-week .scheduler-event-content {
+	font-size: 11px !important;
 }

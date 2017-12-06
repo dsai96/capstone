@@ -22,55 +22,128 @@ function deactivateNavItems () {
 	});
 } 
 
+function buildSections ( data, omit_id ) {
+	var sections = JSON.parse(data.responseText)
+
+	var shown_sections = []
+	var parsed_sections = {}
+
+	var days_to_date = {
+		'U': 14,
+		'M': 15,
+		'T': 16,
+		'W': 17,
+		'R': 18,
+		'F': 19,
+		'S': 20,
+	}
+
+	var colors = ['#CD5C5C', '#6e7bb2', '#6fa397']
+	for (var i=0; i<sections.length; i++) {
+
+		var id = sections[i][0]['id']
+		var start_time = sections[i][0]['start_time'].split("T")[1].split(":")
+		var end_time = sections[i][0]['end_time'].split("T")[1].split(":")
+		var color = sections[i][2]; 
+
+		var days = sections[i][0]['days'].trim().split("")
+
+		for (var d=0; d<days.length; d++) {
+			var day = days_to_date[days[d]]
+
+			var event = {
+    			content: sections[i][1].code,
+	        	color: color,
+    			startDate: new Date(2018, 0, day, parseInt(start_time[0]), parseInt(start_time[1])),
+    			endDate: new Date(2018, 0, day, parseInt(end_time[0]), parseInt(end_time[1])),
+    			course: sections[i][1]
+    		}
+
+			if (sections[i][1].id != omit_id && sections[i][0]['name'].includes('Lec')) {
+    			shown_sections.push(event)
+    		}
+
+    		if (parsed_sections[id] == null) {
+    			parsed_sections[id] = [event]
+    		} else {
+    			parsed_sections[id].push(event) 
+    		}
+		}
+	}
+
+	var options = $('input[name="section"]')
+	for (var i=0; i<options.length; i++) {
+		if (options[i].checked) {
+			var id = options[i].id
+			var these_sections = parsed_sections[id]
+			for (var s=0; s<these_sections.length; s++) {
+				if (these_sections[s]['course'].id != omit_id) {
+					shown_sections.push(these_sections[s])
+				}
+			}
+		}
+	}
+
+	return shown_sections
+
+}
+
+function renderSections ( sections ) {
+	$('#calendar_view').empty();
+
+	YUI().use(
+	  'aui-scheduler',
+	  function(Y) {
+	    var events = sections;
+	    // [
+	    //   {
+	    //     content: '15-112',
+	    //     color: '#8aa382',
+	    //     meeting: true,
+	    //     endDate: new Date(2018, 0, 15, 14),
+	    //     startDate: new Date(2018, 0, 15, 13)
+	    //   }
+	    // ];
+
+	    var agendaView = new Y.SchedulerAgendaView();
+	    var dayView = new Y.SchedulerDayView();
+	    var weekView = new Y.SchedulerWeekView({
+
+	    });
+	    var monthView = new Y.SchedulerMonthView();
+
+	    var eventRecorder = new Y.SchedulerEventRecorder();
+
+	    new Y.Scheduler(
+	      {
+	        activeView: weekView,
+	        boundingBox: '#calendar_view',
+	        date: new Date(2018, 0, 15),
+	        eventRecorder: eventRecorder,
+	        items: events,
+	        render: true,
+	        views: [weekView]
+	      }
+	    );
+	  }
+	);
+}
+
 $( document ).ready(function() {
+
+
 
 	if ($('#schedule_plan').is(':visible')) {
 
 		$.ajax ({
 			url: 'student_sections.json',
 		    complete: function (data) {
-		    	console.log(data.responseText)
-		    	// get events
+
+				var shown_sections = buildSections(data)	
+				renderSections(shown_sections)	    	
 		    }
 		})
-	      
-
-		YUI().use(
-		  'aui-scheduler',
-		  function(Y) {
-		    var events = [
-		      // {
-		      //   content: '15-112',
-		      //   color: '#8aa382',
-		      //   meeting: true,
-		      //   endDate: new Date(2018, 0, 15, 14),
-		      //   startDate: new Date(2018, 0, 15, 13)
-		      // }
-		    ];
-
-		    var agendaView = new Y.SchedulerAgendaView();
-		    var dayView = new Y.SchedulerDayView();
-		    var weekView = new Y.SchedulerWeekView({
-
-		    });
-		    var monthView = new Y.SchedulerMonthView();
-
-		    var eventRecorder = new Y.SchedulerEventRecorder();
-
-		    new Y.Scheduler(
-		      {
-		        activeView: weekView,
-		        boundingBox: '#calendar_view',
-		        date: new Date(2018, 0, 15),
-		        eventRecorder: eventRecorder,
-		        items: events,
-		        render: true,
-		        views: [weekView]
-		      }
-		    );
-		  }
-		);
-
+		
 		// var days = document.getElementsByClassName('scheduler-view-day-header-day-number');
 		// console.log(days.length)
 		// for (var i=0; i < 7; i++) {
@@ -82,6 +155,8 @@ $( document ).ready(function() {
 	$('.ui.accordion')
 	  $('.ui.accordion').accordion();
 	;
+
+	$( ".ui.checkbox" ).checkbox();
     
     $('.ui.dropdown').dropdown({
 		onChange: function(values) {
@@ -103,7 +178,32 @@ $( document ).ready(function() {
 
 	$('#added_courses').bind("DOMSubtreeModified", function(){
 		$('.ui.accordion').accordion();
+		
 	});
+
+	$('.delete_added_course').bind( 'click', function( e ) {
+		var id = e.currentTarget.id
+		$.ajax ({
+			url: 'student_sections.json',
+		    complete: function (data) {
+				var shown_sections = buildSections(data, id)	
+				renderSections(shown_sections)	    	
+		    }
+		})
+	});
+
+	$('input[name=section]').change( function() { 
+		if ($('#schedule_plan').is(':visible')) {
+			$.ajax ({
+				url: 'student_sections.json',
+			    complete: function (data) {
+					var shown_sections = buildSections(data)	
+					renderSections(shown_sections)	    	
+			    }
+			})
+		}
+	});
+
 
 	$('#requirements').bind("DOMSubtreeModified", function(){
 		$('.ui.accordion').accordion();

@@ -1,19 +1,28 @@
-<div class="ui accordion">
-
-    <% @courses.each do |course| %>
-
-        <div class="title">
-          <i class="dropdown icon"></i>
-          <%= course.code %> <%= course.name %>
-          <div class="course-actions">
-            <%= link_to "<i class='add circle icon'></i>".html_safe, add_course_path(:course => course), remote: true, method: :post  %>
-            <!-- <i class="empty star icon"></i> -->
+<div class="ui grid">
+  <div class="sixteen wide column unpad">
+    <div class="ui divider"></div>
+  </div>
+  <% @courses.each do |course| %>
+    <div class="fourteen wide column unpad">
+      <div class="ui accordion">
+          <div class="title">
+            <i class="dropdown icon"></i>
+            <%= course.code %> <%= course.name %>
           </div>
-        </div>
-        <div class="content course-details">
-          <p class="course-units">Units: <%= course.units %></p>
-          <p><%= course.description %></p>
-        </div>
-      
-    <% end %>
+          <div class="content course-details">
+            <p class="course-units">Units: <%= course.units %></p>
+            <p><%= course.description %></p>
+          </div>
+      </div>
+    </div>
+    <div class="two wide column unpad">
+      <div class="course-actions">
+        <%= link_to "<i class='add circle icon'></i>".html_safe, add_course_path(:course => course), remote: true, method: :post  %>
+        <!-- <i class="empty star icon"></i> -->
+      </div>
+    </div>
+    <div class="sixteen wide column unpad">
+      <div class="ui divider"></div>
+    </div>
+  <% end %>
 </div>

@@ -6,7 +6,8 @@
 			  	<div class="courses_added_wrapper">
 				    <i class="dropdown icon"></i>
 					<%= course.code %>
-					<%= link_to "<i class='trash icon add-course'></i>".html_safe, delete_course_path(:course => course), remote: true, method: :delete  %>
+					<% icon_path = "<i id=" + course.id.to_s + " class='trash icon add-course delete_added_course'></i>" %>
+					<%= link_to icon_path.html_safe, delete_course_path(:course => course), remote: true, method: :delete  %>
 					<%#= link_to "<i class='hide icon add-course'></i>".html_safe, '#' %>
 
 				</div>
@@ -18,15 +19,16 @@
 				      	<span class="lecture"> <%= sec.name %></span><span class="times"><%= sec.start_time.strftime("%l:%M%P") %> - <%= sec.end_time.strftime("%l:%M%P") %></span>
 					<% end %>		
 				<% end %>
-			  	<% course.sections.by_name.each do |sec| %>
-			  		<% unless sec.name.include?('Lec') %>
-				      	<div class="ui radio checkbox">
-					        <input type="radio" name="example2" checked="checked">
-							<label><%= sec.name %><span class="times"><%= sec.start_time.strftime("%l:%M%P") %> - <%= sec.end_time.strftime("%l:%M%P") %></span></label>
-						</div>
-					<% end %>		
-				<% end %>
-				
+				<div class="ui form">
+				  	<% course.sections.by_name.each do |sec| %>
+				  		<% unless sec.name.include?('Lec') %>
+					      	<div class="ui checkbox">
+						        <input type="checkbox" name="section" id=<%= sec.id %> checked>
+								<label><%= sec.name %><span class="times"><%= sec.start_time.strftime("%l:%M%P") %> - <%= sec.end_time.strftime("%l:%M%P") %></span></label>
+							</div>
+						<% end %>		
+					<% end %>
+				</div>
 			  </div>
 			</div>
 			<div class="ui divider"></div>
